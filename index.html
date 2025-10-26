@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SMART FIDELITY SYSTEMS LLC — Business Support Services</title>
+  <meta name="description" content="SMART FIDELITY SYSTEMS LLC delivers Business Support, Administrative Services, and process optimization for small and mid‑sized companies across the U.S." />
+  <style>
+    /* -------------------------------------------------------
+       Creamy / beige aesthetic inspired by the reference UI
+       ------------------------------------------------------- */
+    :root{
+      --bg:#f6f0e8;          /* milk-beige background */
+      --paper:#fffaf2;       /* warm paper */
+      --ink:#2b2a28;         /* soft charcoal */
+      --muted:#6f6a63;       /* muted text */
+      --accent:#c5a98a;      /* latte accent */
+      --accent-2:#b48c6f;    /* deeper accent */
+      --line:#e9dfd3;        /* dividers */
+      --card:#fbf6ee;        /* card fill */
+      --ok:#3aa76d;          /* success */
+      --warn:#d2a65b;        /* highlight */
+      --shadow: 0 10px 30px rgba(60,45,30,.10);
+      --radius: 22px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; 
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height:1.6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* Navigation */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(8px);
+      background: rgba(246,240,232,.75);
+      border-bottom:1px solid var(--line);
+    }
+    .nav-inner{max-width:1200px; margin:0 auto; display:flex; align-items:center; gap:24px; padding:16px 20px;}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px}
+    .logo{width:36px; height:36px; border-radius:12px; background:linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow:var(--shadow);}
+    .brand small{display:block; font-weight:600; color:var(--muted); margin-top:-6px}
+    nav a{color:var(--ink); text-decoration:none; padding:8px 12px; border-radius:12px;}
+    nav a:hover{background:var(--card)}
+    .cta{margin-left:auto}
+    .btn{background:var(--ink); color:#fff; padding:10px 16px; border:none; border-radius:14px; cursor:pointer; box-shadow: var(--shadow);}
+    .btn.alt{background:linear-gradient(135deg, var(--accent), var(--accent-2));}
+    .btn.ghost{background:transparent; color:var(--ink); border:1px solid var(--line)}
+
+    /* Container helpers */
+    .wrap{max-width:1200px; margin:0 auto; padding:42px 20px}
+    .grid{display:grid; gap:24px}
+
+    /* Hero */
+    .hero{padding:32px 0 20px;}
+    .hero-card{position:relative; border-radius:calc(var(--radius) + 6px); overflow:hidden; background:linear-gradient(135deg, #efe7dd 0%, #fffaf2 55%); box-shadow:var(--shadow)}
+    .hero-media{height:360px; background:url('https://images.unsplash.com/photo-1529336953121-ad8b840f3e90?q=80&w=1400&auto=format&fit=crop') center/cover no-repeat; filter:saturate(.9) contrast(.98)}
+    .hero-overlay{position:absolute; inset:0; background:linear-gradient( to right, rgba(30,25,20,.55), rgba(30,25,20,.05) 60% );}
+    .hero-copy{position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:28px; color:#fff}
+    .hero h1{font-size:42px; line-height:1.15; margin:0 0 8px}
+    .hero p{max-width:720px; font-size:18px; opacity:.95}
+    .hero .cta-row{display:flex; gap:12px; margin-top:16px}
+
+    /* Section titles */
+    .eyebrow{letter-spacing:.24em; text-transform:uppercase; font-size:12px; color:var(--muted)}
+    h2{font-size:30px; line-height:1.25; margin:8px 0 14px}
+    .section{margin-top:14px}
+
+    /* About cards */
+    .about-grid{grid-template-columns: 1.2fr .8fr}
+    .card{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow)}
+
+    .stats{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px; margin-top:8px}
+    .stat{background:var(--card); border:1px dashed var(--line); border-radius:18px; padding:16px; text-align:center}
+    .stat b{font-size:22px; display:block}
+
+    /* Services */
+    .services-grid{grid-template-columns: repeat(3, 1fr)}
+    .service{position:relative; overflow:hidden}
+    .service .tag{position:absolute; top:14px; left:14px; background:#fff; color:var(--ink); padding:6px 10px; border-radius:999px; border:1px solid var(--line); font-size:12px}
+    .service h3{margin:10px 0 8px}
+
+    /* Advantage / Why choose */
+    .benefits-grid{grid-template-columns: repeat(3, 1fr)}
+
+    /* Process */
+    .process{display:grid; grid-template-columns: repeat(3, 1fr); gap:18px}
+    .step{position:relative}
+    .step:after{content:"→"; position:absolute; right:-12px; top:42%; color:var(--accent-2); font-weight:700; font-size:20px}
+    .step:last-child:after{display:none}
+
+    /* Spotlight */
+    .spotlight{display:grid; grid-template-columns: 1fr 1fr; gap:24px}
+    .spotlight .img{border-radius:var(--radius); height:300px; background:url('https://images.unsplash.com/photo-1552581234-26160f608093?q=80&w=1400&auto=format&fit=crop') center/cover no-repeat}
+
+    /* Solutions */
+    .solutions{display:grid; grid-template-columns: repeat(4, 1fr); gap:14px}
+    .pill{border:1px solid var(--line); background:var(--card); padding:14px; border-radius:16px}
+
+    /* Contact */
+    .contact-cta{display:flex; align-items:center; justify-content:space-between; gap:18px; background:linear-gradient(135deg, #efe6d9, #fffaf2); border:1px solid var(--line); padding:24px; border-radius:var(--radius); box-shadow:var(--shadow)}
+
+    /* Footer */
+    footer{border-top:1px solid var(--line); background:#f2eadf; padding:24px 20px}
+
+    /* Modal form */
+    .modal{position:fixed; inset:0; display:none; place-items:center; background:rgba(30,25,20,.45); z-index:100}
+    .modal.active{display:grid}
+    .modal-card{width:min(600px, 92vw); background:var(--paper); border-radius:22px; padding:22px; box-shadow:var(--shadow); border:1px solid var(--line)}
+    .modal-card h3{margin:4px 0 8px}
+    .field{display:flex; flex-direction:column; gap:6px; margin:10px 0}
+    input, textarea, select{width:100%; padding:12px 14px; border-radius:12px; border:1px solid var(--line); background:#fff; color:var(--ink)}
+    textarea{min-height:110px; resize:vertical}
+    .row{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
+    .modal-actions{display:flex; justify-content:flex-end; gap:10px; margin-top:10px}
+    .note{font-size:12px; color:var(--muted)}
+
+    /* Success toast */
+    .toast{position:fixed; bottom:26px; right:26px; background:#fff; border:1px solid var(--line); padding:14px 16px; border-radius:16px; box-shadow:var(--shadow); display:none}
+    .toast.show{display:block}
+
+    /* Media queries */
+    @media (max-width: 980px){
+      .about-grid, .services-grid, .benefits-grid, .spotlight, .solutions{grid-template-columns: 1fr}
+      .process{grid-template-columns: 1fr;}
+      .step:after{display:none}
+      .hero-media{height:300px}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================= NAVIGATION ========================= -->
+  <header class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          SMART FIDELITY SYSTEMS LLC
+          <small>Business Support Services</small>
+        </div>
+      </div>
+      <nav>
+        <a href="#about">Who We Are</a>
+        <a href="#services">What We Do</a>
+        <a href="#benefits">Why Us</a>
+        <a href="#process">How We Work</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="cta">
+        <button class="btn alt" id="openContactTop">Start a Project</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================= HERO ========================= -->
+  <section class="hero wrap" aria-label="Bringing structure to business operations">
+    <div class="hero-card">
+      <div class="hero-media"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-copy">
+        <h1>Operational Clarity for Ambitious Teams</h1>
+        <p>We help small and mid‑sized companies streamline admin, standardize processes, and unlock capacity. From intake to invoice, our specialists reduce friction so your people can focus on customers and growth.</p>
+        <div class="cta-row">
+          <button class="btn alt" id="openContactHero">Book a Discovery Call</button>
+          <a class="btn ghost" href="#services">Explore Services</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= ABOUT ========================= -->
+  <section id="about" class="wrap section" aria-label="About SMART FIDELITY SYSTEMS LLC">
+    <div class="eyebrow">Inside the Studio</div>
+    <h2>We Turn Administrative Chaos into Repeatable Wins</h2>
+    <div class="grid about-grid">
+      <article class="card">
+        <p>SMART FIDELITY SYSTEMS LLC is a Clearwater‑based provider of <strong>Business Support Services</strong> spanning administrative operations, shared services design, and recurring back‑office execution. We build playbooks, configure light‑weight tooling, and staff dependable coordinators so that owners get reliable, week‑over‑week output without micromanaging.</p>
+        <p>Our team blends enterprise‑grade process thinking with the practicality of a small business. We obsess over intake rules, naming conventions, SLAs, and evidence trails—because frictionless admin creates measurable margin.</p>
+        <p>We specialize in repeatable work: vendor onboarding, document control, CRM hygiene, travel and calendar orchestration, and compliant records management. For each engagement we shape a living <em>Service Catalog</em> with clear cues, so stakeholders know exactly how to ask and what to expect.</p>
+        <p>Clients choose us when they want a single point of accountability, a tidy queue, and zero drama during audits. We serve Florida and remote U.S. companies across services, light manufacturing, and technology‑enabled businesses.</p>
+        <p>We operate on transparent monthly subscriptions and measurable KPIs so you always see what you’re getting and where the time goes.</p>
+        <div class="stats">
+          <div class="stat"><b>1200+ hrs</b>Admin hours returned to client teams in 2024</div>
+          <div class="stat"><b>98.4%</b>Tasks delivered on or before SLA</div>
+          <div class="stat"><b>35%</b>Avg. cost reduction vs. in‑house admin</div>
+        </div>
+      </article>
+      <aside class="card">
+        <h3>Quick Facts</h3>
+        <ul>
+          <li>Corporate Email: <a href="mailto:miani@smartfidelitysystems.org">miani@smartfidelitysystems.org</a></li>
+          <li>Address: 3350 Ulmerton Rd Ste 23, Clearwater, FL 33762</li>
+          <li>Focus: Business Support, Administrative & Waste Management coordination</li>
+          <li>Coverage: On‑site in Tampa Bay + remote nationwide</li>
+          <li>Security: Access‑scoped SOPs + least‑privilege principles</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ========================= SERVICES ========================= -->
+  <section id="services" class="wrap section" aria-label="Service Catalog">
+    <div class="eyebrow">Service Catalog</div>
+    <h2>Practical Services That Remove Busywork</h2>
+    <div class="grid services-grid">
+
+      <article class="card service">
+        <span class="tag">Admin Systems</span>
+        <h3>Workflow Standardization & Shared Services Desk</h3>
+        <p>We map incoming requests, design the triage rubric, and implement a shared services inbox with response SLAs. Your team gets one doorway to ask for help; our coordinators handle the queue and surface only decisions that matter.</p>
+        <p>Deliverables include request forms, naming conventions, intake macros, and an owner’s dashboard. We can host the desk or train your internal assistant team to run it with confidence.</p>
+        <p>Common wins: faster approvals, fewer follow‑ups, and auditable records that make compliance teams smile.</p>
+      </article>
+
+      <article class="card service">
+        <span class="tag">Data Hygiene</span>
+        <h3>CRM, Docs, and Records Management</h3>
+        <p>Clean data is compound interest. We fix duplicate contacts, normalize tags, and enforce file paths so that every quote, SOW, and certificate is findable in under 30 seconds.</p>
+        <p>We create a retention schedule and automate reminders, then train staff on “how we name, where we store, and when we archive.”</p>
+        <p>Expect fewer surprises during audits, faster onboarding for new hires, and richer reporting that actually informs decisions.</p>
+      </article>
+
+      <article class="card service">
+        <span class="tag">Ops Support</span>
+        <h3>Vendor & Field Coordination</h3>
+        <p>From waste hauling schedules to cleaning contracts and building access lists, we own the details that keep your locations humming.</p>
+        <p>We negotiate service calendars, document COIs, and set escalation ladders so break‑fix moments are calm and predictable.</p>
+        <p>You’ll see fewer site interruptions and tighter spend control without pulling managers off revenue work.</p>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ========================= BENEFITS / WHY US ========================= -->
+  <section id="benefits" class="wrap section" aria-label="Why choose SMART FIDELITY SYSTEMS LLC">
+    <div class="eyebrow">Why Our Clients Stay</div>
+    <h2>Three Reasons Teams Prefer Us</h2>
+    <div class="grid benefits-grid">
+      <article class="card">
+        <h3>Evidence Over Theater</h3>
+        <p>We measure the work. Every ticket, doc, and approval leaves a breadcrumb so leaders can audit outcomes, not chase updates. Weekly scorecards show volume, SLA compliance, and the top five blockers we’re removing.</p>
+      </article>
+      <article class="card">
+        <h3>Design for Non‑Specialists</h3>
+        <p>Playbooks are written for the people who actually use them. We prefer checklists, embedded screenshots, and short patterns over long manuals. Anyone on your team can follow the path, not just the ops nerds.</p>
+      </article>
+      <article class="card">
+        <h3>Right‑Sized Tooling</h3>
+        <p>No expensive platforms. We stitch together pragmatic tools you already pay for—Google Workspace, Microsoft 365, Slack, and a light task queue—so change management is quick and budgets stay sane.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========================= PROCESS ========================= -->
+  <section id="process" class="wrap section" aria-label="Our process">
+    <div class="eyebrow">How We Work</div>
+    <h2>From Intake to Improvement in Three Steps</h2>
+    <div class="process">
+      <article class="card step">
+        <h3>1) Discovery & Baseline</h3>
+        <p>We interview requesters, shadow recurring tasks, and capture the current flow. Output: a simple current‑state map, risk notes, and quick wins we can deploy within the first week.</p>
+      </article>
+      <article class="card step">
+        <h3>2) Build the Desk</h3>
+        <p>We design forms, rules, and documentation; connect calendars and files; and pilot the shared inbox for two weeks. Stakeholders start using a single entry point with clear SLAs.</p>
+      </article>
+      <article class="card step">
+        <h3>3) Operate & Optimize</h3>
+        <p>Our coordinators run the desk, publish weekly scorecards, and refine SOPs based on real tickets. When volume stabilizes, we can transition to your internal team—no lock‑in.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========================= SPOTLIGHT (detailed service) ========================= -->
+  <section class="wrap section" aria-label="Detailed Service Spotlight">
+    <div class="eyebrow">Deeper Dive</div>
+    <h2>Spotlight: Environmental & Waste Vendor Management</h2>
+    <div class="spotlight">
+      <div class="img" role="img" aria-label="Coordinating waste management schedules and compliance"></div>
+      <article class="card">
+        <p>Many operators overspend on hauling and disposal because schedules drift and tickets lack documentation. We centralize your waste vendor data—container sizes, service frequency, site constraints, photos, and COIs—into a tidy register that purchasing and facility leads actually use.</p>
+        <p>We then implement an exceptions playbook: overflows, compactor downtime, route changes, and seasonal adjustments. Each event is timestamped and tied to a location so credits are recovered and patterns are visible.</p>
+        <p>Result: fewer emergency pulls, lower contamination fees, and a calm monthly bill review that catches anomalies before accounting closes.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ========================= SOLUTIONS (like more services) ========================= -->
+  <section class="wrap section" aria-label="Our solutions">
+    <div class="eyebrow">More Ways We Help</div>
+    <h2>Configurable Solutions You Can Mix & Match</h2>
+    <div class="solutions">
+      <div class="pill">Executive calendar + travel orchestration with vendor pre‑clearance</div>
+      <div class="pill">Onboarding kits for new hires: accounts, folders, and first‑week checklists</div>
+      <div class="pill">Quarterly records audit and document retention sweeps</div>
+      <div class="pill">Customer service macros for consistent tone and faster resolution</div>
+      <div class="pill">Expense & receipts pipeline—from capture to reconciliation</div>
+      <div class="pill">Vendor due‑diligence packets (W‑9, insurance, banking verification)</div>
+      <div class="pill">Conference, offsite, and board‑meeting logistics</div>
+      <div class="pill">Light procurement desk with three‑quote comparison</div>
+    </div>
+  </section>
+
+  <!-- ========================= CONTACT CTA ========================= -->
+  <section id="contact" class="wrap section" aria-label="Contact SMART FIDELITY SYSTEMS LLC">
+    <div class="contact-cta">
+      <div>
+        <div class="eyebrow">Let’s Talk</div>
+        <h2>Ready to Get Your Admin Under Control?</h2>
+        <p>Tap the button to open our contact form. We’ll respond within one business day with a short list of clarifying questions and a proposed discovery call time.</p>
+      </div>
+      <div>
+        <button class="btn alt" id="openContact">Open Contact Form</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= FOOTER (Contacts always) ========================= -->
+  <footer>
+    <div class="wrap" style="padding:0">
+      <div class="grid" style="grid-template-columns:1fr 1fr; gap:10px">
+        <div>
+          <strong>SMART FIDELITY SYSTEMS LLC</strong><br/>
+          3350 Ulmerton Rd Ste 23, Clearwater, FL 33762
+        </div>
+        <div style="text-align:right">
+          <a href="mailto:miani@smartfidelitysystems.org">miani@smartfidelitysystems.org</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================= CONTACT MODAL ========================= -->
+  <div class="modal" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactTitle" aria-hidden="true">
+    <div class="modal-card">
+      <div class="eyebrow">Say Hello</div>
+      <h3 id="contactTitle">Tell Us What You Need</h3>
+      <p class="note">We use plain language. Pick the closest option and tell us the outcome you want. We’ll route it to the right person.</p>
+
+      <form id="contactForm">
+        <div class="row">
+          <div class="field">
+            <label for="name">Your name</label>
+            <input id="name" name="name" placeholder="e.g., Alex Morgan" required />
+          </div>
+          <div class="field">
+            <label for="email">Business email</label>
+            <input id="email" name="email" type="email" placeholder="name@company.com" required />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="company">Company</label>
+            <input id="company" name="company" placeholder="Your organization" />
+          </div>
+          <div class="field">
+            <label for="service">I’m most interested in…</label>
+            <select id="service" name="service">
+              <option>Workflow Standardization</option>
+              <option>CRM & Records Hygiene</option>
+              <option>Vendor & Field Coordination</option>
+              <option>Waste / Environmental Management</option>
+              <option>Custom Solution</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="message">Describe your challenge</label>
+          <textarea id="message" name="message" placeholder="What’s slowing your team down? What outcome would look like a win?" required></textarea>
+        </div>
+
+        <div class="field">
+          <label for="timeline">Ideal start date</label>
+          <input id="timeline" name="timeline" type="date" />
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn ghost" id="closeModal">Cancel</button>
+          <button type="submit" class="btn alt">Send Request</button>
+        </div>
+
+        <!-- prewritten phrases as hints for users -->
+        <details style="margin-top:10px">
+          <summary>Helpful example phrases</summary>
+          <ul>
+            <li>“We need a shared admin inbox with SLAs and a weekly scorecard.”</li>
+            <li>“Please audit our Google Drive and set up a retention schedule.”</li>
+            <li>“Coordinate three waste vendors across five locations and reduce overage fees.”</li>
+            <li>“Create onboarding kits for new hires and lock in a 48‑hour turnaround.”</li>
+          </ul>
+        </details>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================= SUCCESS TOAST ========================= -->
+  <div class="toast" id="toast" role="status" aria-live="polite">
+    <strong>Message sent.</strong> We’ll reply within one business day.
+  </div>
+
+  <script>
+    // Helper: open/close modal
+    const modal = document.getElementById('contactModal');
+    const openers = [
+      document.getElementById('openContact'),
+      document.getElementById('openContactTop'),
+      document.getElementById('openContactHero')
+    ].filter(Boolean);
+    const closeBtn = document.getElementById('closeModal');
+
+    openers.forEach(btn => btn.addEventListener('click', () => {
+      modal.classList.add('active');
+      modal.querySelector('#name').focus();
+    }));
+
+    closeBtn.addEventListener('click', () => modal.classList.remove('active'));
+    modal.addEventListener('click', (e) => { if(e.target === modal) modal.classList.remove('active'); });
+
+    // Form handling with simple validation + fake async submit
+    const form = document.getElementById('contactForm');
+    const toast = document.getElementById('toast');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if(!form.reportValidity()) return; // native validation UI
+
+      // simulate network activity
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const oldLabel = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = oldLabel;
+        form.reset();
+        modal.classList.remove('active');
+        // show toast
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 4000);
+      }, 900);
+    });
+
+    // Accessibility: close modal with Escape
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape' && modal.classList.contains('active')){
+        modal.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>
